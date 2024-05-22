@@ -13,15 +13,15 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddRazorPages(); // Ajoutez cette ligne pour inclure les services Razor Pages
-builder.Services.AddServerSideBlazor(); // Ajoutez cette ligne pour inclure les services Blazor Server
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
-builder.Services.AddScoped<ItemService>(); // Ajoutez cette ligne pour enregistrer le service ItemService
+builder.Services.AddScoped<ItemService>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -31,7 +31,7 @@ builder.Services.AddAuthentication(options =>
     .AddIdentityCookies();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 // Register ApplicationDbContext with the connection string
@@ -79,6 +79,6 @@ app.MapRazorComponents<App>()
 app.MapAdditionalIdentityEndpoints();
 
 app.MapRazorPages();
-app.MapBlazorHub(); // Ajoutez cette ligne pour mapper le Blazor Hub
+app.MapBlazorHub();
 
 app.Run();

@@ -11,12 +11,6 @@
         // Collection de transaction
         public ICollection<Transaction> Transactions { get; set; }
 
-        // Constructeur de EF
-        public User()
-        {
-            Transactions = new HashSet<Transaction>();
-        }
-
         // Créer un nouvel utilisateur
         public User(string username, string passwordHash, string email)
         {

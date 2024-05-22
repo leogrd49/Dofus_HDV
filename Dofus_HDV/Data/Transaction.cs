@@ -9,10 +9,9 @@
         public decimal TotalPrice { get; set; }
         public DateTime TransactionDate { get; set; }
 
-        public User User { get; set; }
-        public Item Item { get; set; }
+        public User? User { get; set; }
+        public Item? Item { get; set; }
 
-        public Transaction() { }
 
         public Transaction(int userId, int itemId, int quantity, decimal totalPrice)
         {

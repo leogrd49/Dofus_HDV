@@ -1,4 +1,5 @@
 ﻿@page "/transactions"
+@using Dofus_HDV.Data
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.EntityFrameworkCore
 @inject UserManager<ApplicationUser> UserManager
@@ -52,8 +53,12 @@ else
         {
             transactions = await DbContext.Transactions
                                           .Include(t => t.Item)
-                                          .Where(t => t.UserID == user.Id)
+                                          .Where(t => t.UserID.ToString() == user.Id)
                                           .ToListAsync();
+        }
+        else
+        {
+            transactions = new List<Transaction>();
         }
     }
 }
