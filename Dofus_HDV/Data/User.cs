@@ -8,11 +8,6 @@
         public string Email { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public User()
-        {
-            // Default constructor
-        }
-
         public User(string username, string passwordHash, string email)
         {
             Username = username;

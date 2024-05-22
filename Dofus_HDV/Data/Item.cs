@@ -10,10 +10,6 @@
         public int Quantity { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public Item()
-        {
-            // Default constructor
-        }
 
         public Item(string itemName, int categoryId, string description, decimal price, int quantity)
         {
