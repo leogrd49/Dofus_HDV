@@ -52,6 +52,9 @@ namespace Dofus_HDV.Data
                       .WithMany()
                       .HasForeignKey(t => t.ItemID);
             });
+
+
+
         }
     }
 }
