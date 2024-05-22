@@ -1,0 +1,59 @@
+﻿@page "/transactions"
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject AppDbContext DbContext
+
+<h3>Mes Transactions</h3>
+
+@if (transactions == null)
+{
+    <p>Chargement...</p>
+}
+else if (transactions.Count == 0)
+{
+    <p>Aucune transaction trouvée.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id de la transaction</th>
+                <th>Nom de l'item'</th>
+                <th>Quantité</th>
+                <th>Prix total</th>
+                <th>Date de transaction</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in transactions)
+            {
+                <tr>
+                    <td>@transaction.TransactionID</td>
+                    <td>@transaction.Item.ItemName</td>
+                    <td>@transaction.Quantity</td>
+                    <td>@transaction.TotalPrice</td>
+                    <td>@transaction.TransactionDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Transaction> transactions;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var user = await UserManager.GetUserAsync(SignInManager.Context.User);
+        if (user != null)
+        {
+            transactions = await DbContext.Transactions
+                                          .Include(t => t.Item)
+                                          .Where(t => t.UserID == user.Id)
+                                          .ToListAsync();
+        }
+    }
+}

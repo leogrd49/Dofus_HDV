@@ -19,12 +19,14 @@
             {
                 base.OnModelCreating(modelBuilder);
 
-                // Additional configuration can go here
                 modelBuilder.Entity<User>(entity =>
                 {
                     entity.HasKey(e => e.UserID);
                     entity.HasIndex(e => e.Username).IsUnique();
                     entity.HasIndex(e => e.Email).IsUnique();
+                    entity.HasMany(e => e.Transactions)
+                          .WithOne(t => t.User)
+                          .HasForeignKey(t => t.UserID);
                 });
 
                 modelBuilder.Entity<Category>(entity =>
@@ -44,15 +46,14 @@
                 modelBuilder.Entity<Transaction>(entity =>
                 {
                     entity.HasKey(e => e.TransactionID);
-                    entity.HasOne<User>()
+                    entity.HasOne(t => t.User)
+                          .WithMany(u => u.Transactions)
+                          .HasForeignKey(t => t.UserID);
+                    entity.HasOne(t => t.Item)
                           .WithMany()
-                          .HasForeignKey(e => e.UserID);
-                    entity.HasOne<Item>()
-                          .WithMany()
-                          .HasForeignKey(e => e.ItemID);
+                          .HasForeignKey(t => t.ItemID);
                 });
             }
         }
     }
 
-}
