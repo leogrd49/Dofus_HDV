@@ -1,0 +1,103 @@
+﻿@page "/hotel"
+
+<link rel="stylesheet" type="text/css" href="/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="/hdv.css">
+
+
+<PageTitle>Home</PageTitle>
+
+<div class="container">
+    <table id="myDataTable" class="display dataTable dataTables">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Catégorie</th>
+                <th>Niveau</th>
+                <th>Prix moyen</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><img src="images/potion_prismatique.png" alt="Potion de rappel prismatique"> Potion de rappel prismatique</td>
+                <td>Permet de se téléporter à un endroit précis</td>
+                <td>Potion de téléportation</td>
+                <td>1</td>
+                <td>----</td>
+                <td><button class="buy-button">Acheter</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><img src="images/potion_rappel.png" alt="Potion de Rappel"> Potion de Rappel</td>
+                <td>Permet de se téléporter à la maison</td>
+                <td>Potion de téléportation</td>
+                <td>10</td>
+                <td>2,743</td>
+                <td><button class="buy-button">Acheter</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><img src="images/potion_rappel.png" alt="Potion de Rappel"> Potion de Rappel (lot de 1)</td>
+                <td>Permet de se téléporter à la maison</td>
+                <td>Potion de téléportation</td>
+                <td>10</td>
+                <td>8,000</td>
+                <td><button class="buy-button">Acheter</button></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><img src="images/potion_rappel.png" alt="Potion de Rappel"> Potion de Rappel (lot de 10)</td>
+                <td>Permet de se téléporter à la maison</td>
+                <td>Potion de téléportation</td>
+                <td>10</td>
+                <td>80,000</td>
+                <td><button class="buy-button">Acheter</button></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><img src="images/potion_rappel.png" alt="Potion de Rappel"> Potion de Rappel (lot de 100)</td>
+                <td>Permet de se téléporter à la maison</td>
+                <td>Potion de téléportation</td>
+                <td>10</td>
+                <td>200,000</td>
+                <td><button class="buy-button">Acheter</button></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><img src="images/potion_scouty.png" alt="Potion de Rappel de M. Scouty"> Potion de Rappel de M. Scouty</td>
+                <td>Une potion spéciale pour se téléporter</td>
+                <td>Potion de téléportation</td>
+                <td>1</td>
+                <td>----</td>
+                <td><button class="buy-button">Acheter</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#myDataTable').DataTable({
+            "info": true,
+            "language": {
+                "lengthMenu": "Afficher _MENU_ Lignes",
+                "zeroRecords": "Aucune infos trouvées",
+                "info": "Affiche la page _PAGE_ sur _PAGES_",
+                "searchPlaceholder": "Rechercher",
+                "paginate": {
+                    "first": "Première",
+                    "last": "Dernière",
+                    "next": "Suivant",
+                    "previous": "Précédent"
+                },
+            }
+        });
+    });
+</script>

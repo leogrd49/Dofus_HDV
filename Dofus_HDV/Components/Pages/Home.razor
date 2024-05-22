@@ -1,7 +1,62 @@
 ﻿@page "/"
 
+
+<link rel="stylesheet" type="text/css" href="/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="/hdv.css">
+
+
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="container">
+    <table id="myDataTable" class="display dataTable dataTables">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Catégorie</th>
+                <th>Niveau</th>
+                <th>Prix moyen</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td><img src="@item.ImageUrl" alt="@item.Nom"> @item.Nom</td>
+                    <td>@item.Description</td>
+                    <td>@item.Categorie</td>
+                    <td>@item.Niveau</td>
+                    <td>@item.PrixMoyen</td>
+                    <td><button class="buy-button">Acheter</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-Welcome to your new app.
+
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#myDataTable').DataTable({
+            "info": true,
+            "language": {
+                "lengthMenu": "Afficher _MENU_ Lignes",
+                "zeroRecords": "Aucune infos trouvées",
+                "info": "Affiche la page _PAGE_ sur _PAGES_",
+                "searchPlaceholder": "Rechercher",
+                "paginate": {
+                    "first": "Première",
+                    "last": "Dernière",
+                    "next": "Suivant",
+                    "previous": "Précédent"
+                },
+            }
+        });
+    });
+</script>
