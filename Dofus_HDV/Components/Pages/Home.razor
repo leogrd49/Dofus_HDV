@@ -1,5 +1,12 @@
 ﻿@page "/"
 
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+@inject ItemService ItemService
+
+@using Dofus_HDV.Data 
+
 
 <link rel="stylesheet" type="text/css" href="/jquery.dataTables.css">
 <link rel="stylesheet" type="text/css" href="/hdv.css">
@@ -21,15 +28,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in items)
             {
                 <tr>
-                    <td>@item.Id</td>
-                    <td><img src="@item.ImageUrl" alt="@item.Nom"> @item.Nom</td>
+                    <td>@item.ItemID</td>
                     <td>@item.Description</td>
-                    <td>@item.Categorie</td>
-                    <td>@item.Niveau</td>
-                    <td>@item.PrixMoyen</td>
+                    <td>@item.CategoryID</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
                     <td><button class="buy-button">Acheter</button></td>
                 </tr>
             }
@@ -60,3 +66,12 @@
         });
     });
 </script>
+
+@code {
+    private List<Item> items = new List<Item>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        items = await ItemService.GetItemsAsync();
+    }
+}
