@@ -5,10 +5,6 @@
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
 
-        public Category()
-        {
-            // Default constructor
-        }
 
         public Category(string categoryName)
         {
