@@ -21,17 +21,17 @@ namespace Dofus_HDV.Data
         [Column("Price")]
         public decimal Price { get; set; }
 
-        [Column("Quantity")]
-        public int Quantity { get; set; }
+        [Column("Level")]
+        public int Level { get; set; }
         public Item() { }
 
-        public Item(string itemName, int categoryId, string description, decimal price, int quantity)
+        public Item(string itemName, int categoryId, string description, decimal price, int level)
         {
             ItemName = itemName;
             CategoryID = categoryId;
             Description = description;
             Price = price;
-            Quantity = quantity;
+            Level = level;
         }
     }
 
