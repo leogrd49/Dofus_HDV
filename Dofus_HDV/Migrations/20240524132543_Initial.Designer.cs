@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dofus_HDV.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240524120741_Initial")]
+    [Migration("20240524132543_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -58,10 +58,6 @@ namespace Dofus_HDV.Migrations
                         .HasColumnType("int")
                         .HasColumnName("CategoryID");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreatedAt");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -72,13 +68,13 @@ namespace Dofus_HDV.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ItemName");
 
+                    b.Property<int>("Level")
+                        .HasColumnType("int")
+                        .HasColumnName("Level");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("Price");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int")
-                        .HasColumnName("Quantity");
 
                     b.HasKey("ItemID");
 
@@ -107,8 +103,9 @@ namespace Dofus_HDV.Migrations
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TransactionID");
 
@@ -121,11 +118,8 @@ namespace Dofus_HDV.Migrations
 
             modelBuilder.Entity("Dofus_HDV.Data.User", b =>
                 {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
