@@ -23,11 +23,6 @@ namespace Dofus_HDV.Data
 
         [Column("Quantity")]
         public int Quantity { get; set; }
-
-        [Column("CreatedAt")]
-        public DateTime CreatedAt { get; set; }
-
-
         public Item() { }
 
         public Item(string itemName, int categoryId, string description, decimal price, int quantity)
@@ -37,7 +32,6 @@ namespace Dofus_HDV.Data
             Description = description;
             Price = price;
             Quantity = quantity;
-            CreatedAt = DateTime.Now;
         }
     }
 

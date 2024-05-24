@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dofus_HDV.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240522135403_Identity")]
-    partial class Identity
+    [Migration("20240524120741_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
