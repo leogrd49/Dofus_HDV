@@ -1,82 +1,57 @@
 ﻿@page "/hotel"
 
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject ItemService ItemService
+@inject IJSRuntime JS
+
+@using Dofus_HDV.Data
+
 <link rel="stylesheet" type="text/css" href="/jquery.dataTables.css">
 <link rel="stylesheet" type="text/css" href="/hdv.css">
 
-
 <PageTitle>Home</PageTitle>
+
+<div>
+    <p>@HelloWorld</p>
+</div>
 
 <div class="container">
     <table id="myDataTable" class="display dataTable dataTables">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Catégorie</th>
                 <th>Niveau</th>
+                <th>Quantité</th>
                 <th>Prix moyen</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td><img src="images/potion_prismatique.png" alt="Potion de rappel prismatique"> Potion de rappel prismatique</td>
-                <td>Permet de se téléporter à un endroit précis</td>
-                <td>Potion de téléportation</td>
-                <td>1</td>
-                <td>----</td>
-                <td><button class="buy-button">Acheter</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><img src="images/potion_rappel.png" alt="Potion de Rappel"> Potion de Rappel</td>
-                <td>Permet de se téléporter à la maison</td>
-                <td>Potion de téléportation</td>
-                <td>10</td>
-                <td>2,743</td>
-                <td><button class="buy-button">Acheter</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><img src="images/potion_rappel.png" alt="Potion de Rappel"> Potion de Rappel (lot de 1)</td>
-                <td>Permet de se téléporter à la maison</td>
-                <td>Potion de téléportation</td>
-                <td>10</td>
-                <td>8,000</td>
-                <td><button class="buy-button">Acheter</button></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td><img src="images/potion_rappel.png" alt="Potion de Rappel"> Potion de Rappel (lot de 10)</td>
-                <td>Permet de se téléporter à la maison</td>
-                <td>Potion de téléportation</td>
-                <td>10</td>
-                <td>80,000</td>
-                <td><button class="buy-button">Acheter</button></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td><img src="images/potion_rappel.png" alt="Potion de Rappel"> Potion de Rappel (lot de 100)</td>
-                <td>Permet de se téléporter à la maison</td>
-                <td>Potion de téléportation</td>
-                <td>10</td>
-                <td>200,000</td>
-                <td><button class="buy-button">Acheter</button></td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td><img src="images/potion_scouty.png" alt="Potion de Rappel de M. Scouty"> Potion de Rappel de M. Scouty</td>
-                <td>Une potion spéciale pour se téléporter</td>
-                <td>Potion de téléportation</td>
-                <td>1</td>
-                <td>----</td>
-                <td><button class="buy-button">Acheter</button></td>
-            </tr>
+            @foreach (var item in items)
+            {
+                <tr>
+                    <td>@item.ItemName</td>
+                    <td>@item.Description</td>
+                    <td>@item.CategoryID</td>
+                    <td>@item.Level</td>
+                    <td>
+                        <select name="quantity" id="quantity">
+                            <option value="1">1</option>
+                            <option value="10">10</option>
+                            <option value="100">100</option>
+                        </select>
+                    </td>
+                    <td>@item.Price</td>
+                    <td><button class="buy-button" @onclick="() => BuyItem()">Acheter</button></td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
+
 
 
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -101,3 +76,18 @@
         });
     });
 </script>
+
+@code {
+    private List<Item> items = new List<Item>();
+    private string HelloWorld;
+
+    protected override async Task OnInitializedAsync()
+    {
+        items = await ItemService.GetItemsAsync();
+    }
+
+    private void BuyItem()
+    {
+        HelloWorld = "Hello World";
+    }
+}
